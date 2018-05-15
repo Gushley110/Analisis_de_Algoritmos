@@ -1,0 +1,108 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{anysize}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+    
+    \begin{titlepage}
+    
+        \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+        \begin{center}
+            \textsc{\LARGE 
+                    \begin{figure}[h]
+                        \includegraphics[scale=0.3]{ipn}
+                        \hspace{10cm}
+                        \includegraphics[scale=0.2]{escom}
+                    \end{figure}
+                    }\\[0.5cm]
+            \textsc{\Large Instituto Politécnico Nacional}\\[0.2cm]
+            \textsc{\large Escuela Superior de Cómputo}\\[0.2cm]
+            
+            \HRule \\[0.3cm]
+                { \huge \bfseries Práctica 6: Problema del máximo subarreglo}\\[0.3cm]
+            \HRule \\[1cm]
+            
+            \begin{minipage}{0.4\textwidth}
+                \begin{flushleft} \large
+                    \emph{Autor:}\\
+                    Peralta Ramírez E. Fabián
+                \end{flushleft}
+            \end{minipage}
+            ~
+            \begin{minipage}{0.4\textwidth}
+                \begin{flushright} \large
+                    \emph{e-mail:} \\
+                    fabperaltar@gmail.com
+                \end{flushright}
+            \end{minipage}\\[1cm]
+            
+            {\large Análisis de algoritmos, Sem 2018-1, 3CV1 Práctica 6}\\[0.5cm]
+            
+            {\large 25-octubre-2017}\\[0.5cm]
+            \vfill
+        \end{center}
+        
+        \noindent En este reporte se analizará mediante la práctica la complejidad de los algoritmos de ordenamiento Merge y Mergesort, de manera analítica y mediante la experimentación se obtendrá la complejidad de estos algoritmos.\\
+        Utilizando el paradigma de divide y vencerás simplificaremos el trabajo dividiéndolo en subtrabajos.
+        
+    \end{titlepage}
+    
+    \tableofcontents
+    
+    \newpage
+    
+    \section{Palabras clave}
+    
+        \begin{itemize}
+            \item Recursividad
+            \item Paradigma 
+            \item Dividir
+            \item Subtrabajo
+            \item Algoritmo
+        \end{itemize}
+
+    \section{Experimentación y resultados}
+    
+        \noindent {\large {\bf Demostrar analíticamente que el algoritmo del máximo subarreglo cruzado tiene complejidad lineal.}}\\
+        \newline
+    	MSC(A, bajo, medio, alto)  \hspace{4cm} Costo\\
+    	1.-sumaIzq $ \leftarrow \infty $ \hspace{6cm} 1\\
+    	2.-suma$ \leftarrow 0 $ \hspace{7cm} 1\\
+    	3.-for i=medio to i=bajo \hspace{4cm} medio-bajo+2\\
+    	4.-\hspace{0.5 cm} suma $ \leftarrow $ suma +A[i] \hspace{4.5cm} 1\\
+    	5.-\hspace{0.5cm} if suma $ \> $ sumaIzq \hspace{5cm} 1 \\
+    	6.-\hspace{1cm} sumaIzq $ \leftarrow $ suma \hspace{4.5cm} 1 \\
+    	7.-\hspace{1cm} maxIzq $ \leftarrow $ i \hspace{5.5cm} 1 \\
+        8.-sumaDer $ \leftarrow \infty $ \hspace{6cm} 1\\
+    	9.-suma$ \leftarrow 0 $ \hspace{7cm} 1\\
+        10.-for i=medio+1 to i=alto \hspace{4cm} alto-(medio+1)+2\\
+    	11.-\hspace{0.5 cm} suma $ \leftarrow $ suma +A[i] \hspace{4.2cm} 1\\
+    	12.-\hspace{0.5cm} if suma $ \> $ sumaDer \hspace{4.5cm} 1 \\
+    	13.-\hspace{1cm} sumaDer $ \leftarrow $ suma \hspace{4cm} 1 \\
+    	14.-\hspace{1cm} maxDer $ \leftarrow $ i \hspace{5cm} 1 \\
+    	
+    	\noindent medio-bajo+2+alto-medio-1+2 \\
+    	= alto-bajo+3 \\
+    	= alto-bajo+1+2 \\
+    	= n+2 \\
+    	= $ \theta (n) $
+        
+    \newpage
+        
+        \noindent {\large {\bf Demostrar analíticamente que el algoritmo del máximo subarreglo tiene complejidad $ \theta (nlog(n)) $.}}\\    
+        \newline
+        1.-if bajo=alto \hspace{6cm} $ \theta(1) $ \\
+        2.-\hspace{0.5cm} return(bajo, alto A[bajo]) \hspace{3cm} $ \theta(1) $ \\
+        3.-else \\
+        4.-medio $ \leftarrow $ (bajo+alto)/2 \hspace{5cm} 1 \\
+        5.-MS(A, bajo, medio) \hspace{5.5cm} $ T(\frac{n}{2}) $ \\
+        6.-MS(A, medio+1, alto) \hspace{5cm} $ T(\frac{n}{2}) $ \\
+        7.-MSC(A, bajo, medio, alto) \hspace{4cm} $ \theta (n) $ \\
+        8.-if(sumaIzq $ \< $ sumDer $ \& $ sumaIzq $ \> $ sumaCruz)  \hspace{1cm} $ \theta (1) $\\
+        9.-return(mmIzq, maxIzq, sumaIzq)  \hspace{3cm} $ \theta (1) $\\
+\end{document}
